@@ -10,15 +10,18 @@ void quick_sort(int *array, size_t size)
 		q_rec(array, 0, size - 1, size);
 }
 /**
- * 
- *
- *
+ * q_partition - function that separate the array
+ * @array: array to be sorted
+ * @low: the first element of the partition
+ * @high: the last element of the partition
+ * @size: size of the array
+ * Return: the pivot
  */
 size_t q_partition(int *array, size_t low, size_t high, size_t size)
 {
 	int aux;
 	size_t p = high, j, i;
-	
+
 	i = low - 1;
 	for (j = low; j <= high; j++)
 	{
@@ -45,9 +48,11 @@ size_t q_partition(int *array, size_t low, size_t high, size_t size)
 	return (i);
 }
 /**
- *
- *
- *
+ * q_rec - function that make recursive the partition
+ * @array: array to be sorted
+ * @low: the first element of the partition
+ * @high: the last element of the partition
+ * @size: size of the array
  */
 void q_rec(int *array, size_t low, size_t high, size_t size)
 {
