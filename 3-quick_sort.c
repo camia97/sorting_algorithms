@@ -6,31 +6,28 @@
  */
 void quick_sort(int *array, size_t size)
 {
-	(void) size;
-	q_sort(array, 0, size - 1, size);
+	if (array && size > 1)
+		q_rec(array, 0, size - 1, size);
 }
 /**
  * 
  *
  *
  */
-void q_sort(int *array, size_t high, size_t low, size_t size)
+size_t q_partition(int *array, size_t low, size_t high, size_t size)
 {
 	int aux;
-	size_t p = size, j, i;
+	size_t p = high, j, i;
 	
-	(void) low;
-	(void) high;
-
 	i = low - 1;
-	for (j = 0; j < size - 1; j++)
+	for (j = low; j <= high; j++)
 	{
 		if (array[j] < array[p])
 		{
 			i++;
 			if (i != j)
 			{
-				aux = array[i];
+				aux = array[j];
 				array[j] = array[i];
 				array[i] = aux;
 				print_array(array, size);
@@ -38,10 +35,31 @@ void q_sort(int *array, size_t high, size_t low, size_t size)
 		}
 	}
 	i++;
-	if (p != i)
+	if (array[i] > array[p])
 	{
 		aux = array[p];
 		array[p] = array[i];
 		array[i] = aux;
+		print_array(array, size);
 	}
+	return (i);
+}
+/**
+ *
+ *
+ *
+ */
+void q_rec(int *array, size_t low, size_t high, size_t size)
+{
+	size_t idx;
+
+	if (low < high)
+	{
+		idx = q_partition(array, low, high, size);
+		if (idx > 0)
+			q_rec(array, low, idx - 1, size);
+		if (idx < high)
+			q_rec(array, idx + 1, high, size);
+	}
+
 }
